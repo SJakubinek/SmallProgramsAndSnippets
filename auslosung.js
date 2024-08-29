@@ -8,11 +8,15 @@
 // Start at command line with node auslosung.js
 // (You need to have node installed!)
 
-let names = ["Anton","Benjamin","Benni","Björn","Charlie","Emil","Eva","Felix",
-   "James","Lucas","Maurice","Oliver","Olivia","Olli","Otto","Sina","Sören",
-   "Tony","Willi","William"];
+let names = ["Anton", "Balu", "Benjamin", "Benni", "Beule", "Björn", "Boo", 
+   "Charlie", "Dumbo", "Emil", "Eva", "Felix", "Fienchen", "Flecki", "Green",
+   "Hoppel", "Hopps", "James", "Jumbo", "Kowalski", "Littlefoot", "Lucas",
+   "Luna", "Maurice", "Mausi", "Mecki", "Olivia", "Olli", "Otto", "Patch",
+   "Pillow", "Pink", "Ringebu", "Ruppi", "Schlubbidu", "Schnuppe",
+   "Schrecklinde", "Sina", "Sören", "Ssst", "Sullivan", "Tentakulus", "Tony",
+   "Turbo", "Ufonaut", "Willi", "William", "Wolli"];
 let namesString = "";
-const numbersNeeded = 10;
+const numbersNeeded = 48;
 let i = 0;
 
 while (i < numbersNeeded)
