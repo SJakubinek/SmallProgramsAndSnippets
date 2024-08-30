@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.FileIO;
@@ -10,11 +11,52 @@ namespace calcHandicap
     {
         Dictionary<string, double> courseRating = new Dictionary<string, double>();
         Dictionary<string, int> slopeRating = new Dictionary<string, int>();
+
         private void frmCalcHandicap_Load(object sender, EventArgs e)
         {
-            comboCourse.Items.Insert(0, "Riviera Country Club");
+            // Getting width and height, calculating starting point.
+            // So the window starts in the middle of the screen.
+            int width = Screen.PrimaryScreen.Bounds.Width;
+            int height = Screen.PrimaryScreen.Bounds.Height;
+            int frmWidth = Width;
+            int frmHeight = Height;
+
+            int calcWidth = (width - frmWidth) / 2;
+            int calcHeight = (height - frmHeight) / 2;
+            Location = new Point(calcWidth, calcHeight);
+
+            // Init Golf courses
+            // More will be added, when I need them
+            comboCourse.Items.Add("Riviera Country Club");
             courseRating.Add("Riviera Country Club", 72.2);
             slopeRating.Add("Riviera Country Club", 130);
+
+            // Fill names dropdown list
+            // There has to be a file with 20 columns (name and 19 zeros) anyway
+            // as I don't needed file creation and append lines
+            string filename = "difScores.csv";
+            using (TextFieldParser parser = new TextFieldParser(filename))
+            {
+                parser.Delimiters = new string[] { ";" };
+
+                // Iterate through lines in CSV
+                while (true)
+                {
+                    // Read all fields and create an array from them
+                    string[] parts = parser.ReadFields();
+
+                    // Get out of the loop if no more lines
+                    if (parts == null)
+                    {
+                        break;
+                    }
+                    // If there is data add a name to the dropdown list
+                    else
+                    {
+                        comboName.Items.Add(parts[0]);
+                    }
+                }
+            }
         }
 
         public frmCalcHandicap()
@@ -50,7 +92,7 @@ namespace calcHandicap
                     else
                     {
                         // If the first value of the line is the same as the one the user entered into the form
-                        if (parts[0] == txtBoxName.Text)
+                        if (parts[0] == comboName.SelectedItem.ToString())
                         {
                             for (int i = 1; i < parts.Length; i++)
                             {
@@ -87,7 +129,7 @@ namespace calcHandicap
             }
 
             // Create line for replacing in the CSV
-            string newLine = txtBoxName.Text + ";";
+            string newLine = comboName.SelectedItem.ToString() + ";";
             for (int i = 0; i < newDifScores.Length; i++)
             {
                 newLine += newDifScores[i];
@@ -102,7 +144,7 @@ namespace calcHandicap
             string[] lines = File.ReadAllLines(filename);
             for (int i = 0; i < lines.Length; i ++)
             {
-                if (lines[i].Contains(txtBoxName.Text))
+                if (lines[i].Contains(comboName.SelectedItem.ToString()))
                 {
                     lines[i] = newLine;
                 }

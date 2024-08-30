@@ -31,12 +31,12 @@
             this.lblCourse = new System.Windows.Forms.Label();
             this.comboCourse = new System.Windows.Forms.ComboBox();
             this.lblName = new System.Windows.Forms.Label();
-            this.txtBoxName = new System.Windows.Forms.TextBox();
             this.txtBoxScore = new System.Windows.Forms.TextBox();
             this.lblScore = new System.Windows.Forms.Label();
             this.btnCalc = new System.Windows.Forms.Button();
             this.lblHandicap = new System.Windows.Forms.Label();
             this.txtBoxHandicap = new System.Windows.Forms.TextBox();
+            this.comboName = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // lblCourse
@@ -50,7 +50,9 @@
             // 
             // comboCourse
             // 
-            this.comboCourse.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.comboCourse.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboCourse.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboCourse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboCourse.FormattingEnabled = true;
             this.comboCourse.Location = new System.Drawing.Point(209, 44);
             this.comboCourse.Name = "comboCourse";
@@ -66,13 +68,6 @@
             this.lblName.Size = new System.Drawing.Size(98, 13);
             this.lblName.TabIndex = 2;
             this.lblName.Text = "What\'s your name?";
-            // 
-            // txtBoxName
-            // 
-            this.txtBoxName.Location = new System.Drawing.Point(209, 71);
-            this.txtBoxName.Name = "txtBoxName";
-            this.txtBoxName.Size = new System.Drawing.Size(185, 20);
-            this.txtBoxName.TabIndex = 2;
             // 
             // txtBoxScore
             // 
@@ -113,7 +108,7 @@
             // 
             this.txtBoxHandicap.BackColor = System.Drawing.SystemColors.Control;
             this.txtBoxHandicap.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtBoxHandicap.Location = new System.Drawing.Point(209, 184);
+            this.txtBoxHandicap.Location = new System.Drawing.Point(209, 187);
             this.txtBoxHandicap.Name = "txtBoxHandicap";
             this.txtBoxHandicap.ReadOnly = true;
             this.txtBoxHandicap.Size = new System.Drawing.Size(185, 13);
@@ -121,17 +116,28 @@
             this.txtBoxHandicap.TabStop = false;
             this.txtBoxHandicap.Text = "0,0";
             // 
+            // comboName
+            // 
+            this.comboName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboName.FormattingEnabled = true;
+            this.comboName.Location = new System.Drawing.Point(209, 70);
+            this.comboName.Name = "comboName";
+            this.comboName.Size = new System.Drawing.Size(185, 21);
+            this.comboName.TabIndex = 9;
+            // 
             // frmCalcHandicap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(478, 251);
+            this.Controls.Add(this.comboName);
             this.Controls.Add(this.txtBoxHandicap);
             this.Controls.Add(this.lblHandicap);
             this.Controls.Add(this.btnCalc);
             this.Controls.Add(this.txtBoxScore);
             this.Controls.Add(this.lblScore);
-            this.Controls.Add(this.txtBoxName);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.comboCourse);
             this.Controls.Add(this.lblCourse);
@@ -150,13 +156,13 @@
 
         private System.Windows.Forms.Label lblCourse;
         private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.TextBox txtBoxName;
         private System.Windows.Forms.TextBox txtBoxScore;
         private System.Windows.Forms.Label lblScore;
         private System.Windows.Forms.Button btnCalc;
         private System.Windows.Forms.Label lblHandicap;
         private System.Windows.Forms.TextBox txtBoxHandicap;
         internal System.Windows.Forms.ComboBox comboCourse;
+        private System.Windows.Forms.ComboBox comboName;
     }
 }
 
