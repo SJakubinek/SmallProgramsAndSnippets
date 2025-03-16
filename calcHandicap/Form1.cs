@@ -28,12 +28,17 @@ namespace calcHandicap
             // Init Golf courses
             // More will be added, when I need them
             comboCourse.Items.Add("Riviera Country Club");
+            comboCourse.Items.Add("Detroit Golf Club");
             courseRating.Add("Riviera Country Club", 72.2);
+            courseRating.Add("Detroit Golf Club", 73.8);
             slopeRating.Add("Riviera Country Club", 130);
+            slopeRating.Add("Detroit Golf Club", 131);
 
             // Fill names dropdown list
             // There has to be a file with 20 columns (name and 19 zeros) anyway
             // as I don't needed file creation and append lines
+            // Needs to have a CSV in the following format for starting:
+            // Name;0;0,0;0,0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
             string filename = "difScores.csv";
             using (TextFieldParser parser = new TextFieldParser(filename))
             {
@@ -68,7 +73,7 @@ namespace calcHandicap
         {
             string filename = "difScores.csv";
             double[] DifScores = new double[20];
-            double[] newDifScores = new double[19];
+            double[] newDifScores = new double[20];
             double bestDifScoresAdded = new double();
             double newDifScore = new double();
             double newHandicap = new double();
@@ -94,13 +99,14 @@ namespace calcHandicap
                         // If the first value of the line is the same as the one the user entered into the form
                         if (parts[0] == comboName.SelectedItem.ToString())
                         {
+                            // Start at 1, because 0 is the name
                             for (int i = 1; i < parts.Length; i++)
                             {
                                 // Store all old values for calculating
                                 DifScores[i-1] = double.Parse(parts[i]);
+                                // Don't store the last value, as it will be deleted
                                 if (i < parts.Length - 1)
                                 {
-                                    // Don't store the last value, as it will be exchanged by the newly calculated one
                                     newDifScores[i] = double.Parse(parts[i]);
                                 }
                             }
@@ -110,18 +116,17 @@ namespace calcHandicap
                 // Calculate the differential
                 newDifScore = (double.Parse(txtBoxScore.Text) - courseRating[comboCourse.SelectedItem.ToString()]) * 113 / slopeRating[comboCourse.SelectedItem.ToString()];
                 // Truncate so only one digit after the decimal.
-                DifScores[19] = Math.Truncate(newDifScore * 10) / 10;
                 newDifScores[0] = Math.Truncate(newDifScore * 10) / 10;
 
                 // Sort array as we only need the best 10 scores.
-                Array.Sort(DifScores);
+                Array.Sort(newDifScores);
 
                 // Iterate through array 10 times for adding the best 10 scores
                 for (int i = 0; i < 10; i++)
                 {
-                    bestDifScoresAdded += DifScores[i];
+                    bestDifScoresAdded += newDifScores[i];
                 }
-                // Calculate average and send the result it to the form
+                // Calculate average and send the result to the form
                 newHandicap = bestDifScoresAdded / 10;
                 txtBoxHandicap.Text = newHandicap.ToString("0.0");
 
