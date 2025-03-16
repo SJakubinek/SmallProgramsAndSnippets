@@ -1,0 +1,16 @@
+{
+  "name": "gps2kml",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node index.js"
+  },
+  "author": "S. Jakubinek",
+  "license": "UNLICENCED",
+  "description": "",
+  "private": true,
+  "dependencies": {
+    "exifreader": "^4.26.2"
+  }
+}
